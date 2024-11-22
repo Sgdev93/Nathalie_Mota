@@ -1,10 +1,25 @@
 <?php
-get_header(); // Inclut le fichier header.php
-if (have_posts()) : 
-    while (have_posts()) : the_post();
-        the_title('<h1>', '</h1>'); // Titre de la page
-        the_content(); // Contenu de la page
-    endwhile; 
-endif;
-get_footer(); // Inclut le fichier footer.php
-?>
+/**
+ * The template for displaying all single posts
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package WordPress
+ * @subpackage Twenty_Twenty_One
+ * @since Twenty Twenty-One 1.0
+ */
+
+get_header();
+
+/* Start the Loop */
+while ( have_posts() ) :
+	the_post();
+	get_template_part( 'template-parts/content/content-page' );
+
+	// If comments are open or there is at least one comment, load up the comment template.
+	if ( comments_open() || get_comments_number() ) {
+		comments_template();
+	}
+endwhile; // End of the loop.
+
+get_footer();
